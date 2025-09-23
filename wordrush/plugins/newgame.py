@@ -5,31 +5,23 @@ from wordrush.core.database import difficulty_col
 @wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:\s+(\w+))?$"))
 async def newgame(event):
     difficulty = event.pattern_match.group(1)
+    valid_difficulties = ["easy", "medium", "hard", "extreme"]
     if difficulty:
         difficulty = difficulty.strip().lower()
-        if difficulty == "easy":
-            difficulty = "easy"
-        if difficulty == "medium":
-            difficulty = "medium"
-        if difficulty == "hard":
-            difficulty = "hard"
-        if difficulty == "extreme":
-            difficulty = "extreme"
-        if difficulty:
+        if difficulty not in valid_difficulties:
             return await event.reply(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 3-4 latter word.\n`medium` To give 5 latter word.\n`hard` - To give 6-8 latter word.\n`extreme` - To give 9-12 latter word.")
     else:
-        pass
-    if event.is_private:
-        sender = await event.get_sender()
-        sender_id = sender.id
-        if not difficulty:
-            doc = difficulty_col.find_one({"chat_id": sender_id})
-            difficulty = doc["difficulty"] if doc and "difficulty" in doc else "medium"
+        if event.is_private:
+            sender = await event.get_sender()
+            sender_id = sender.id
+            if not difficulty:
+                doc = difficulty_col.find_one({"chat_id": sender_id})
+                difficulty = doc["difficulty"] if doc and "difficulty" in doc else "medium"
         
-    chat_id = event.chat_id
-    if not difficulty:
-        doc = difficulty_col.find_one({"chat_id": chat_id})
-        difficulty = doc["difficulty"] if doc and "difficulty" in doc else "medium"
+        chat_id = event.chat_id
+        if not difficulty:
+            doc = difficulty_col.find_one({"chat_id": chat_id})
+            difficulty = doc["difficulty"] if doc and "difficulty" in doc else "medium"
     if difficulty == "easy":
         latters = "3-4"
     if difficulty == "medium":
