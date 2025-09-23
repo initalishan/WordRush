@@ -1,1 +1,4 @@
-µé^¶'v‹^žúrš‰à
+telethon
+pymongo
+dotenv
+
