@@ -2,7 +2,7 @@ from telethon import events
 from wordrush.core.client import wordrush
 from wordrush.core.database import difficulty_col
 
-@wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:\s+(\w+))?$""))
+@wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:\s+(\w+))?$"))
 async def newgame(event):
     difficulty = event.pattern_match.group(1)
     if difficulty.lower() == "easy":
