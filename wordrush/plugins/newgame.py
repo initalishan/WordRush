@@ -4,14 +4,14 @@ from wordrush.core.database import difficulty_col
 
 @wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:\s+(\w+))?$"))
 async def newgame(event):
-    difficulty = event.pattern_match.group(1)
-    if difficulty.lower() == "easy":
+    difficulty = event.pattern_match.group(1).strip().lower()
+    if difficulty == "easy":
         difficulty = "easy"
-    if difficulty.lower() == "medium":
+    if difficulty == "medium":
         difficulty = "medium"
-    if difficulty.lower() == "hard":
+    if difficulty == "hard":
         difficulty = "hard"
-    if difficulty.lower() == "extreme":
+    if difficulty == "extreme":
         difficulty = "extreme"
     if difficulty:
         return await event.reply(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 3-4 latter word.\n`medium` To give 5 latter word.\n`hard` - T give 6-8 latter word.\n`extreme` - To give 9-12 latter word.")
