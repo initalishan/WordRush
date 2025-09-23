@@ -16,7 +16,7 @@ async def newgame(event):
         if difficulty == "extreme":
             difficulty = "extreme"
         if difficulty:
-            return await event.reply(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 3-4 latter word.\n`medium` To give 5 latter word.\n`hard` - T give 6-8 latter word.\n`extreme` - To give 9-12 latter word."
+            return await event.reply(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 3-4 latter word.\n`medium` To give 5 latter word.\n`hard` - T give 6-8 latter word.\n`extreme` - To give 9-12 latter word.")
     else:
         pass
     if event.is_private:
