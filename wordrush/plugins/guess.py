@@ -3,6 +3,7 @@ from wordrush.core.client import wordrush
 from wordrush.config import is_playing, current_difficulty, guess_history
 from wordrush.utils.buttons import play_again_button
 from wordrush.plugins.newgame import start_newgame
+from wordrush.core.database import users_pts_col
 import re
 
 with open("word.txt") as f:
@@ -50,10 +51,32 @@ async def guess(event):
                 status.append(" 🟥")
     if chat_id not in guess_history:
         guess_history[chat_id] = []
-    guess_history[chat_id].append(f"{''.join(status)} - **{guess.upper()}**")
+    already_guessed = any(guess.upper() in entry for entry in guess_history[chat_id])
+    if not already_guessed:
+        guess_history[chat_id].append(f"{''.join(status)} - **{guess.upper()}**")
+    else:
+        await event.respond(f"**{guess}** is already guessed.")
     if word == guess:
         full_history = "\n".join(guess_history[chat_id])
-        await event.respond(f"Congratulations dear **{mention} 🎉**\n\nYou guessed the currect word! \nWord was **{word.upper()}", buttons=play_again_button)
+        difficulty = current_difficulty[chat_id]
+        if difficulty == "easy":
+            base_points = 20
+        elif difficulty == "medium":
+            base_points = 40
+        elif difficulty == "hard":
+            base_points = 70
+        elif difficulty == "extreme":
+            base_points = 100
+        else:
+            base_points = 10 
+        turn_no = len(guess_history[chat_id])
+        points = max(int(base_points * (0.9 ** (turn_no - 1))), base_points // 4)
+        await event.respond(f"Congratulations**{mention}**\nYou earned**{points} Points**\n\nYou guessed the currect word! \nWord was **{word.upper()}**", buttons=play_again_button)
+        await users_pts_col.update_one(
+    {"user_id": user.id},
+    {"$inc": {"points": points}},
+    upsert=True
+)
         del is_playing[chat_id]
         del guess_history[chat_id]
     else:
