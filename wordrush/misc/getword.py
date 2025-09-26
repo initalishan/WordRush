@@ -8,8 +8,8 @@ def get_word(difficulty):
     ranges = {
         "easy": (4,4),
         "medium": (5, 5),
-        "hard": (8),
-        "extreme": (10)
+        "hard": (8, 8),
+        "extreme": (10, 10)
     }
     min_len, max_len = (ranges[difficulty])
     filtered = [w for w in words if min_len <= len(w) <= max_len]

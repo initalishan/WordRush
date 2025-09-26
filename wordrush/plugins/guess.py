@@ -17,6 +17,7 @@ async def guess(event):
         return
     text = event.text.strip()
     if not re.fullmatch(r"A-Za-z+", text):
+        print("hello")
         return
     if guess not in valid_words:
         await event.reply(f"**{guess}** is not a valid word.")
@@ -52,6 +53,7 @@ async def guess(event):
         del is_playing[chat_id]
     else:
         await event.respond(f"{' '.join(status)} - {guess.upper()}")
+        
 @wordrush.on(events.CallbackQuery(data=b"play_again"))
 async def call_newgame(event):
     chat_id = event.chat_id
