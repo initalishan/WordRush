@@ -7,7 +7,7 @@ from wordrush.misc.getword import get_word
 @wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:\s+(.+))?"))
 async def newgame(event):
     chat_id = event.chat_id
-    if is_playing[chat_id]:
+    if chat_id in is_playing:
         return await event.respond("There is already a game in progress in this chat. Use **/end** to end the current game.")
     difficulty = event.pattern_match.group(1)
     if difficulty:
