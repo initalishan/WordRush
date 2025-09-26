@@ -10,6 +10,8 @@ with open("word.txt") as f:
     
 @wordrush.on(events.NewMessage)
 async def guess(event):
+    if not event.is_private and not event.is_reply:
+        return
     chat_id = event.chat_id
     if not chat_id in is_playing:
         return
