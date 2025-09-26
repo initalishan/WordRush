@@ -41,6 +41,7 @@ async def start_newgame(event, difficulty=None):
     )
     current_difficulty[chat_id] = difficulty
     is_playing[chat_id] = get_word(difficulty)
+    print(f"NEW WORD GENRATE: {is_playing[chat_id]}")
 
 
 @wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:\s+(.+))?"))
