@@ -1,6 +1,6 @@
 from telethon import events
 from wordrush.core.client import wordrush
-from wordrush.config import is_playing, current_difficulty
+from wordrush.config import is_playing, current_difficulty, guess_history
 from wordrush.utils.buttons import play_again_button
 from wordrush.plugins.newgame import start_newgame
 import re
@@ -47,11 +47,17 @@ async def guess(event):
                 status.append("🟥")
             else:
                 status.append(" 🟥")
+    if chat_id not in guess_history:
+        guess_history[chat_id] = []
+    guess_history[chat_id].append(f"{''.join(status)} - **{guess.upper()}**")
     if word == guess:
-        await event.respond(f"Congratulations dear **{mention} 🎉**\n\nYou guessed the currect word! \nWord was **{word.upper()}", buttons=play_again_button)
+        full_history = "\n".join(guess_history[chat_id])
+        await event.respond(f"Congratulations dear **{mention} 🎉**\n\nYou guessed the currect word! \nWord was **{word.upper()}\n\n**History:**\n{full_history}", buttons=play_again_button)
         del is_playing[chat_id]
+        del guess_history[chat_id]
     else:
-        await event.respond(f"{' '.join(status)} - {guess.upper()}")
+        full_history = "\n".join(guess_history[chat_id])
+        await event.respond(f"{full_history}")
         
 @wordrush.on(events.CallbackQuery(data=b"play_again"))
 async def call_newgame(event):

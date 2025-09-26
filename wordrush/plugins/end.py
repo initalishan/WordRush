@@ -1,6 +1,6 @@
 from wordrush.core.client import wordrush
 from telethon import events
-from wordrush.config import is_playing
+from wordrush.config import is_playing, guess_history
 
 
 @wordrush.on(events.NewMessage(pattern=r"(?i)\/end"))
@@ -11,3 +11,4 @@ async def game_end(event):
     else:
         await event.respond(f"Game ended!\nCorrect word was **{is_playing[chat_id]}**\nStart new game with **/new**")
         del is_playing[chat_id]
+        del guess_history[chat_id]
