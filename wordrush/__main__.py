@@ -3,7 +3,7 @@ from wordrush.core.client import wordrush
 import importlib
 from asyncio import get_event_loop
 from os import listdir
-
+from wordrush.Logs import logs
 
 async def main():
     print("Starting Client..")
