@@ -4,7 +4,7 @@ from wordrush.core.database import difficulty_col
 from wordrush.config import valid_difficulties, is_playing
 from wordrush.misc.getword import get_word
 
-@wordrush.on(events.NewMessage(pattern=r"(?i)\/new\s(.+)"))
+@wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:\s+(.+))?"))
 async def newgame(event):
     chat_id = event.chat_id
     if is_playing[chat_id]:
