@@ -1,7 +1,8 @@
 import random
 
 with open("word.txt") as f:
-        words = [w.strip().lower() for w in f.readlines() if w.strip().isalpha()]
+    words = [w.strip().lower() for w in f.readlines() if w.strip().isalpha()]
+        
         
 def get_word(difficulty):
     ranges = {
