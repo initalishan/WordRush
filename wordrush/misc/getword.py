@@ -5,10 +5,10 @@ with open("word.txt") as f:
         
 def get_word(difficulty):
     ranges = {
-        "easy": (3, 4),
+        "easy": (4,4),
         "medium": (5, 5),
-        "hard": (6, 8),
-        "extreme": (9, 12)
+        "hard": (8),
+        "extreme": (10)
     }
     min_len, max_len = (ranges[difficulty])
     filtered = [w for w in words if min_len <= len(w) <= max_len]

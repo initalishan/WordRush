@@ -11,7 +11,7 @@ async def difficulty(event):
     if difficulty:
         difficulty = difficulty.strip().lower()
         if difficulty not in valid_difficulties:
-            return await event.respond(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 3-4 latter word.\n`medium` - To give 5 latter word.\n`hard` - To give 6-8 latter word.\n`extreme` - To give 9-12 latter word.")
+            return await event.respond(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 4 latter word.\n`medium` - To give 5 latter word.\n`hard` - To give 8 latter word.\n`extreme` - To give 10 latter word.")
         else:
             difficulty_col.update_one({"chat_id": event.chat_id}, {"$set": {"difficulty": difficulty}}, upsert=True)
             await event.respond(f"difficulty successfully set to **{difficulty}**")

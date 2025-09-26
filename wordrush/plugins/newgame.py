@@ -13,7 +13,7 @@ async def newgame(event):
     if difficulty:
         difficulty = difficulty.strip().lower()
         if difficulty not in valid_difficulties:
-            return await event.reply(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 3-4 latter word.\n`medium` - To give 5 latter word.\n`hard` - To give 6-8 latter word.\n`extreme` - To give 9-12 latter word.")
+            return await event.reply(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 4 latter word.\n`medium` - To give 5 latter word.\n`hard` - To give 8 latter word.\n`extreme` - To give 10 latter word.")
     else:
         if event.is_private:
             sender = await event.get_sender()
@@ -26,12 +26,12 @@ async def newgame(event):
             doc = difficulty_col.find_one({"chat_id": chat_id})
             difficulty = doc["difficulty"] if doc and "difficulty" in doc else "medium"
     if difficulty == "easy":
-        latters = "3-4"
+        latters = "4"
     if difficulty == "medium":
         latters = "5"
     if difficulty == "hard":
-        latters = "6-8"
+        latters = "8"
     if difficulty == "extreme":
-        latters = "9-10"
+        latters = "10"
     await event.respond(f"**Game started!**\nDifficulty set to **{difficulty}** \n\nGuess the **{latters} latters word!**")
     is_playing[chat_id] = get_word(difficulty)
