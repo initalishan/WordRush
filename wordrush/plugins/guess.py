@@ -63,5 +63,4 @@ async def guess(event):
 @wordrush.on(events.CallbackQuery(data=b"play_again"))
 async def call_newgame(event):
     chat_id = event.chat_id
-    else:
-        await start_newgame(event, current_difficulty)
+    await start_newgame(event, current_difficulty)
