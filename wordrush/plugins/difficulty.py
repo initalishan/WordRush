@@ -11,10 +11,11 @@ async def difficulty(event):
         return await event.reply("**Valid usage**\n\n`/difficulty easy`\n**Like this!**\n\n**Available difficulty:**\n")
     user = await event.get_sender()
     chat = await event.get_chat()
-    rights = await wordrush.get_permissions(chat.id, user.id)
-    if not rights.is_admin:
-        await event.reply("You must be an admin to use this.")
-        return
+    if not event.is_private:
+        rights = await wordrush.get_permissions(chat.id, user.id)
+        if not rights.is_admin:
+            await event.reply("You must be an admin to use this.")
+            return
     if is_playing[event.chat_id]:
         return await event.respond("There is already a game in progress in this chat. You can't change the difficulty.\n\nTo stop game hit **/end**")
     if difficulty:

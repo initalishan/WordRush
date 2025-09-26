@@ -8,10 +8,11 @@ async def game_end(event):
     chat_id = event.chat_id
     user = await event.get_sender()
     chat = await event.get_chat()
-    rights = await wordrush.get_permissions(chat.id, user.id)
-    if not rights.is_admin:
-        await event.reply("You must be an admin to use this.")
-        return
+    if not event.is_private:
+        rights = await wordrush.get_permissions(chat.id, user.id)
+        if not rights.is_admin:
+            await event.reply("You must be an admin to use this.")
+            return
     if not chat_id in is_playing:
         await event.respond("There is no game in **progress.**")
     else:
