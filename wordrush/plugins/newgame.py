@@ -1,15 +1,15 @@
 from telethon import events
 from wordrush.core.client import wordrush
 from wordrush.core.database import difficulty_col
+from wordrush.config import valid_difficulties
 
-@wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:\s+(\w+))?$"))
+@wordrush.on(events.NewMessage(pattern=r"(?i)\/new\s(.+)"))
 async def newgame(event):
     difficulty = event.pattern_match.group(1)
-    valid_difficulties = ["easy", "medium", "hard", "extreme"]
     if difficulty:
         difficulty = difficulty.strip().lower()
         if difficulty not in valid_difficulties:
-            return await event.reply(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 3-4 latter word.\n`medium` To give 5 latter word.\n`hard` - To give 6-8 latter word.\n`extreme` - To give 9-12 latter word.")
+            return await event.reply(f"**{difficulty}** is not valid difficult!\n\n**Available Difficulty's:**\n\n`easy` - To give 3-4 latter word.\n`medium` - To give 5 latter word.\n`hard` - To give 6-8 latter word.\n`extreme` - To give 9-12 latter word.")
     else:
         if event.is_private:
             sender = await event.get_sender()
@@ -31,4 +31,3 @@ async def newgame(event):
     if difficulty == "extreme":
         latters = "9-10"
     await event.respond(f"**Game started!**\nDifficulty set to **{difficulty}** \n\nGuess the **{latters} latters word!**")
-    
