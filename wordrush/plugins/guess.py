@@ -19,17 +19,16 @@ async def guess(event):
     if not re.fullmatch(r"[A-Za-z]+", text):
         return
     guess = text.lower()
+    word = is_playing[chat_id].lower()
+    if not len(guess) == len(word):
+        return
     if guess not in valid_words:
         return await event.reply(f"**{guess}** is not a valid word.")
-    word = is_playing[chat_id].lower()
-    
     user = await event.get_sender()
     try:
         mention = f"[{user.first_name}](tg://user?id={user.id})"
     except Exception:
         mention = "Anonymous"
-    if not len(guess) == len(word):
-        return
     status = []
     for i in range(len(word)):
         if word[i] == guess[i]:
