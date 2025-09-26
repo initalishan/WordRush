@@ -4,7 +4,7 @@ from wordrush.core.database import difficulty_col
 from wordrush.config import valid_difficulties
 from wordrush.config import is_playing
 
-@wordrush.on(events.NewMessage(pattern=r"(?i)\/difficulty\s(.+)"))
+@wordrush.on(events.NewMessage(pattern=r"(?i)\/difficulty(?:@[\w]+)?(?:\s+(.+))?"))
 async def difficulty(event):
     difficulty = event.pattern_match.group(1)
     if not difficulty:

@@ -44,7 +44,7 @@ async def start_newgame(event, difficulty=None):
     print(f"NEW WORD GENRATE: {is_playing[chat_id]}")
 
 
-@wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:\s+(.+))?"))
+@wordrush.on(events.NewMessage(pattern=r"(?i)\/new(?:@[\w]+)?(?:\s+(.+))?"))
 async def newgame(event):
     difficulty = event.pattern_match.group(1)
     if difficulty:

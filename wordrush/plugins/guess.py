@@ -71,7 +71,7 @@ async def guess(event):
             base_points = 10 
         turn_no = len(guess_history[chat_id])
         points = max(int(base_points * (0.9 ** (turn_no - 1))), base_points // 4)
-        await event.respond(f"Congratulations**{mention}**\nYou earned**{points} Points**\n\nYou guessed the currect word! \nWord was **{word.upper()}**", buttons=play_again_button)
+        await event.respond(f"Congratulations**{mention}**\nYou earned **{points} Points**\n\nYou guessed the currect word! \nWord was **{word.upper()}**", buttons=play_again_button)
         users_pts_col.update_one(
     {"user_id": user.id},
     {"$inc": {"points": points}},
