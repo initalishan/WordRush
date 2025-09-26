@@ -5,7 +5,7 @@ from wordrush.core.database import users_pts_col
 
 @wordrush.on(events.NewMessage(pattern=r"(?i)\/leaderboard"))
 async def leaderboard(event):
-    top_users = await users_pts_col.find().sort("points", -1).limit(20).to_list(length=20)
+    top_users = users_pts_col.find().sort("points", -1).limit(20).to_list(length=20)
     
     if not top_users:
         return await event.respond("No players found in leaderboard yet.")
