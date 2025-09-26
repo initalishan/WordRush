@@ -20,7 +20,7 @@ async def guess(event):
         return
     guess = text.lower()
     if guess not in valid_words:
-        await event.reply(f"**{guess}** is not a valid word.")
+        return await event.reply(f"**{guess}** is not a valid word.")
     word = is_playing[chat_id].lower()
     
     user = await event.get_sender()
