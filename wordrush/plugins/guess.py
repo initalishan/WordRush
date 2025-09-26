@@ -16,12 +16,11 @@ async def guess(event):
     if event.message.media:
         return
     text = event.text.strip()
-    if not re.fullmatch(r"A-Za-z+", text):
-        print("hello")
+    if not re.fullmatch(r"[A-Za-z]+", text):
         return
+    guess = text.lower()
     if guess not in valid_words:
         await event.reply(f"**{guess}** is not a valid word.")
-    guess = text.lower()
     word = is_playing[chat_id].lower()
     
     user = await event.get_sender()
