@@ -39,7 +39,7 @@ async def add_group_db(event):
     chat_id = int(f"-100{chat.id}" if not str(chat.id).startswith("-100") else chat.id)
     if not groups_col.find_one({"group_id": chat_id}):
         groups_col.insert_one({"group_id": chat_id})
-        full_chat = await zhunehra(GetFullChannelRequest(channel=chat_id))
+        full_chat = await wordrush(GetFullChannelRequest(channel=chat_id))
         channel_obj = full_chat.chats[0]
         full_info = full_chat.full_chat 
         full_name = channel_obj.title
