@@ -2,7 +2,7 @@ from telethon import events
 from wordrush.core.client import wordrush
 from wordrush.core.database import difficulty_col
 from wordrush.config import valid_difficulties
-from wordrush.config import us_playing
+from wordrush.config import is_playing
 
 @wordrush.on(events.NewMessage(pattern=r"(?i)\/difficulty\s(.+)"))
 async def difficulty(event):
