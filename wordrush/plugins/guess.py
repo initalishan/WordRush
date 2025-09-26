@@ -53,7 +53,7 @@ async def guess(event):
     guess_history[chat_id].append(f"{''.join(status)} - **{guess.upper()}**")
     if word == guess:
         full_history = "\n".join(guess_history[chat_id])
-        await event.respond(f"Congratulations dear **{mention} 🎉**\n\nYou guessed the currect word! \nWord was **{word.upper()}\n\n**History:**\n{full_history}", buttons=play_again_button)
+        await event.respond(f"Congratulations dear **{mention} 🎉**\n\nYou guessed the currect word! \nWord was **{word.upper()}", buttons=play_again_button)
         del is_playing[chat_id]
         del guess_history[chat_id]
     else:
@@ -63,7 +63,5 @@ async def guess(event):
 @wordrush.on(events.CallbackQuery(data=b"play_again"))
 async def call_newgame(event):
     chat_id = event.chat_id
-    if not chat_id in is_playing:
-        await event.answer("There is no game in **progress.**\n\nStart the game **/new**")
     else:
         await start_newgame(event, current_difficulty)
