@@ -74,22 +74,7 @@ async def invite_failed_callback(event):
 @wordrush.on(events.NewMessage)
 async def logs(event):
     if event.is_private:
-        user = await event.get_sender()
-        user_id = user.id
-        username = user.username or "Anonymous"
-        first_name = user.first_name or ""
-        last_name = user.last_name or ""
-        full_name = (first_name + " " + last_name).strip()
         await add_user_db(event)
-        try:
-            message = event.message.message
-        except:
-            message = "User send a file."
-        if username != "Anonymous":
-            mention = f"[{full_name}](https://t.me/{username})"
-        else:
-            mention = f"[{full_name}](tg://user?id={user_id})"
-        await wordrush.send_message(chat_log, f"Catch New Message!\nSender: {mention}\nSender_id: {user_id}\nMessage: {message}")
     else:
         await add_group_db(event)
         
