@@ -75,9 +75,24 @@ async def guess(event):
         turn_no = len(guess_history[chat_id])
         points = max(int(base_points * (0.9 ** (turn_no - 1))), base_points // 4)
         await event.respond(f"Congratulations **{mention}**\nYou earned **{points} Points**\n\nYou guessed the currect word! \nWord was **{word.upper()}**", buttons=play_again_button)
+     
+        users_pts_col.update_one(
+    {"user_id": user.id},
+    {
+        "$inc": {"points": points},  # Global total
+        "$setOnInsert": {"created_at": datetime.utcnow()},
+        "$set": {"last_played": datetime.utcnow()}
+    },
+    upsert=True
+)
+
         users_pts_col.update_one(
     {"user_id": user.id, "chat_id": chat_id},
-    {"$inc": {"points": points}, "$setOnInsert": {"created_at": datetime.utcnow()}, "$set": {"last_played": datetime.utcnow()}},
+    {
+        "$inc": {"chat_points": points},
+        "$setOnInsert": {"created_at": datetime.utcnow()},
+        "$set": {"last_played": datetime.utcnow()}
+    },
     upsert=True
 )
         del is_playing[chat_id]
