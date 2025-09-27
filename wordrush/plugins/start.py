@@ -2,7 +2,7 @@ from telethon import events
 from wordrush.core.client import wordrush
 from wordrush.config import start_caption
 from wordrush.misc.safedict import SafeDict
-from wordrusg.utils.buttons import start_buttons, start_group_buttons
+from wordrush.utils.buttons import start_buttons, start_group_buttons
 
 @wordrush.on(events.NewMessage(pattern="(?i)\/start"))
 async def start_handler(event):
