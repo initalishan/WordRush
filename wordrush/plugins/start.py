@@ -12,7 +12,7 @@ async def start_handler(event):
         mention=mention
         )
     formated_start_caption = start_caption.format_map(safe_data)
-    if event.is_private'
+    if event.is_private:
         await event.respond(
         formated_start_caption, buttons=start_buttons
         )
