@@ -5,6 +5,7 @@ from wordrush.utils.buttons import play_again_button
 from wordrush.plugins.newgame import start_newgame
 from wordrush.core.database import users_pts_col
 import re
+from datetime import datetime
 
 with open("word.txt") as f:
     valid_words = set(w.strip().lower() for w in f if w.strip())
@@ -73,8 +74,8 @@ async def guess(event):
         points = max(int(base_points * (0.9 ** (turn_no - 1))), base_points // 4)
         await event.respond(f"Congratulations**{mention}**\nYou earned **{points} Points**\n\nYou guessed the currect word! \nWord was **{word.upper()}**", buttons=play_again_button)
         users_pts_col.update_one(
-    {"user_id": user.id},
-    {"$inc": {"points": points}},
+    {"user_id": user.id, "chat_id", chat_id},
+    {"$inc": {"points": points}, "$setOnInsert": {"created_at": datetime.utcnow()}, "$set": {"last_played": datetime.utcnow()}},
     upsert=True
 )
         del is_playing[chat_id]
