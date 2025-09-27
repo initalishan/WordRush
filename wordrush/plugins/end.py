@@ -17,5 +17,8 @@ async def game_end(event):
         await event.respond("There is no game in **progress.**")
     else:
         await event.respond(f"Game ended!\nCorrect word was **{is_playing[chat_id]}**\nStart new game with **/new**")
-        del is_playing[chat_id]
-        del guess_history[chat_id]
+        try:
+            del is_playing[chat_id]
+            del guess_history[chat_id]
+        except:
+            pass
