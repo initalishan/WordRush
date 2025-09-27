@@ -6,7 +6,7 @@ guess_history = {}
 user_log_caption="Congratulations.\nNew user started **WordRush.**\n\nUsername: @{username}\nName: {full_name}\nId: {sender_id}"
 group_log_caption="Congratulations.\n**WordRush** has been added to one more group.\n\nusername: @{username}\nName: {full_name}\nId: {chat_id}"
 
-start_caption = "**Hey there** {mention},\n\nWelcome to **[WordRushBot](https://t.me/wordrush_bot),\n\n**The ultimate word challange —— fun, fast, and competitive With leaderboard, only on Telegram!**\n\n1. Use **/new** to start a game. Add me to a group with admin permission to play with your friends.\n\n**Click in the Help Menu button below To get more information, How to play and about commands.**"
+start_caption = "**Hey there** {mention},\n\nWelcome to **[WordRushBot](https://t.me/wordrush_bot)**,\n\n**The ultimate word challange —— fun, fast, and competitive With leaderboard, only on Telegram!**\n\n1. Use **/new** to start a game. Add me to a group with admin permission to play with your friends.\n\n**Click in the Help Menu button below To get more information, How to play and about commands.**"
 
 help_menu_caption = "**WordRush's Help menu**\n\n Choose the category you want to help with **WordRush**\n\nAny problem ask your doubt at [WordRush Play & Report](https://t.me/astrabotz_chat)"
 
