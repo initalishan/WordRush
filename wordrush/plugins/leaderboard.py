@@ -17,14 +17,13 @@ def get_leaderboard_buttons(chat_id):
 
 
 async def fetch_leaderboard(event, filter_query, per_chat=False):
-    # Choose field based on global or per-chat
     sort_field = "chat_points" if per_chat else "points"
-    top_users = list(users_pts_col.find(filter_query).sort(sort_field, -1).limit(20))
+    top_users = list(users_pts_col.find(filter_query).sort(sort_field, -1).limit(10))
 
     if not top_users:
         return "No players found for this leaderboard yet."
 
-    leaderboard_text = "🏆 **Leaderboard (Top 20)** 🏆\n\n"
+    leaderboard_text = "🏆 **Leaderboard (Top 10)** 🏆\n\n"
     medals = ["🥇", "🥈", "🥉"]
 
     for idx, user in enumerate(top_users, start=1):
