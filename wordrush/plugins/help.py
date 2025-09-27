@@ -1,6 +1,6 @@
 from wordrush.core.client import wordrush
 from telethon import events
-from wordrush.config import start_caption, help_menu_caption, commands_menu_caption, how_to_play_caption
+from wordrush.config import start_caption, start_caption_2 help_menu_caption, commands_menu_caption, how_to_play_caption
 from wordrush.utils.buttons import start_buttons, start_group_buttons, help_menu_buttons, back_to_help_buttons
 
 async def help_menu(event):
@@ -16,7 +16,7 @@ async def help_menu_call_with_command(event):
     
 @wordrush.on(events.CallbackQuery(data=b"back_to_start"))
 async def back_to_start(event):
-    await event.edit(start_caption, buttons=start_buttons)
+    await event.edit(start_caption_2, buttons=start_buttons)
     
 @wordrush.on(events.CallbackQuery(data=b"back_to_help"))
 async def back_to_help(event):
