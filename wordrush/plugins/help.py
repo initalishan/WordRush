@@ -17,6 +17,10 @@ async def help_menu_call_with_command(event):
 @wordrush.on(events.CallbackQuery(data=b"back_to_start"))
 async def back_to_start(event):
     await event.edit(start_caption, buttons=start_buttons)
+    
+@wordrush.on(events.CallbackQuery(data=b"back_to_help"))
+async def back_to_help(event):
+    await event.edit(help_menu_caption, buttons=help_menu_buttons)
 
 @wordrush.on(events.CallbackQuery(data=b"how_to_play"))
 async def how_to_play(event):
