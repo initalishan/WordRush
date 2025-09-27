@@ -1,6 +1,6 @@
 from wordrush.core.client import wordrush
 from telethon import events
-from wordrush.config import start_caption, start_caption_2 help_menu_caption, commands_menu_caption, how_to_play_caption
+from wordrush.config import start_caption, start_caption_2, help_menu_caption, commands_menu_caption, how_to_play_caption
 from wordrush.utils.buttons import start_buttons, start_group_buttons, help_menu_buttons, back_to_help_buttons
 
 async def help_menu(event):
