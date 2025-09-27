@@ -13,7 +13,9 @@ with open("word.txt") as f:
 @wordrush.on(events.NewMessage)
 async def guess(event):
     if not event.is_private and event.is_reply:
-        return
+        reply_msg = await event.get_reply_message()
+        if reply_msg and reply_msg.sender_id != (await event.client.get_me()).id:
+            return
     chat_id = event.chat_id
     if not chat_id in is_playing:
         return
@@ -72,7 +74,7 @@ async def guess(event):
             base_points = 10 
         turn_no = len(guess_history[chat_id])
         points = max(int(base_points * (0.9 ** (turn_no - 1))), base_points // 4)
-        await event.respond(f"Congratulations**{mention}**\nYou earned **{points} Points**\n\nYou guessed the currect word! \nWord was **{word.upper()}**", buttons=play_again_button)
+        await event.respond(f"Congratulations **{mention}**\nYou earned **{points} Points**\n\nYou guessed the currect word! \nWord was **{word.upper()}**", buttons=play_again_button)
         users_pts_col.update_one(
     {"user_id": user.id, "chat_id": chat_id},
     {"$inc": {"points": points}, "$setOnInsert": {"created_at": datetime.utcnow()}, "$set": {"last_played": datetime.utcnow()}},
